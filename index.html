@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="ballCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('ballCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let ball = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      radius: 50,
+      color: 'blue',
+      speed: 100
+    };
+	
+
+
+    function drawBall() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = ball.color;
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function moveBall(event) {
+      switch (event.key) {
+        case 'ArrowUp':
+          ball.y -= ball.speed;
+          break;
+        case 'ArrowDown':
+          ball.y += ball.speed;
+          break;
+        case 'ArrowLeft':
+          ball.x -= ball.speed;
+          break;
+        case 'ArrowRight':
+          ball.x += ball.speed;
+          break;
+      }
+      drawBall();
+    }
+
+    document.addEventListener('keydown', moveBall);
+    drawBall();
+  </script>
+</body>
+</html>
